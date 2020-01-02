@@ -5,22 +5,21 @@ import java.util.AbstractList;
 /**
  * A class that implements a doubly linked list
  *
- * @author UC San Diego Intermediate Programming MOOC team
- *
  * @param <E> The type of the elements stored in the list
+ * @author UC San Diego Intermediate Programming MOOC team
  */
 public class MyLinkedList<E> extends AbstractList<E> {
 
-    ListNode<E> head;
-    ListNode<E> tail;
+    LLNode<E> head;
+    LLNode<E> tail;
     int size;
 
     /**
      * Create a new empty LinkedList
      */
     public MyLinkedList() {
-        head = new ListNode<>(null);
-        tail = new ListNode<>(null);
+        head = new LLNode<>(null);
+        tail = new LLNode<>(null);
         // link head and tail
         head.next = tail;
         tail.prev = head;
@@ -32,20 +31,20 @@ public class MyLinkedList<E> extends AbstractList<E> {
      * @param element The element to add
      */
     public boolean add(E element) {
-        ListNode<E> current = new ListNode<>(element);
+        LLNode<E> current = new LLNode<>(element);
         // empty list
         if (size == 0) {
             link(head, current, tail);
         } else {
             // first get last node then link them 
-            ListNode<E> left = tail.prev;
+            LLNode<E> left = tail.prev;
             link(left, current, tail);
         }
         size++;
         return true;
     }
 
-    private void link(ListNode<E> left, ListNode<E> current, ListNode<E> right) {
+    private void link(LLNode<E> left, LLNode<E> current, LLNode<E> right) {
         current.next = left.next;
         current.prev = left;
         left.next = current;
@@ -63,7 +62,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
         if (size == 0 || index < 0 || index > size) {
             throw new IndexOutOfBoundsException("invalid get");
         } else {
-            ListNode<E> temp = head;
+            LLNode<E> temp = head;
             while (index > 0 && temp != null) {
                 temp = temp.next;
                 index--;
@@ -74,8 +73,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
     /**
      * Add an element to the list at the specified index
-     *
-     * @param The index where the element should be added
+     * @param  index where the element should be added
      * @param element The element to add
      */
     public void add(int index, E element) {
@@ -86,8 +84,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
      * Return the size of the list
      */
     public int size() {
-        // TODO: Implement this method
-        return -1;
+        return size;
     }
 
     /**
@@ -100,7 +97,6 @@ public class MyLinkedList<E> extends AbstractList<E> {
      *
      */
     public E remove(int index) {
-        // TODO: Implement this method
         return null;
     }
 
@@ -118,15 +114,13 @@ public class MyLinkedList<E> extends AbstractList<E> {
     }
 }
 
-class ListNode<E> {
+class LLNode<E> {
 
-    ListNode<E> prev;
-    ListNode<E> next;
+    LLNode<E> prev;
+    LLNode<E> next;
     E data;
 
-    // TODO: Add any other methods you think are useful here
-    // E.g. you might want to add another constructor
-    public ListNode(E e) {
+    public LLNode(E e) {
         this.data = e;
         this.prev = null;
         this.next = null;
